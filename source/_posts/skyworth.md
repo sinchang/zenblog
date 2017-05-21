@@ -1,5 +1,6 @@
 ---
 title: 使用 adb 给创维智能电视安装 APK
+date: 2017-01-22
 tags:
 - Android
 - 智能电视

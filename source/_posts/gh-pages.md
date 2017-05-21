@@ -1,5 +1,6 @@
 ---
 title: 如何自动化部署项目到 gh-pages
+date: 2017-03-19
 tags:
 - GitHub
 - Travis CI

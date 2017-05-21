@@ -1,5 +1,6 @@
 ---
 title: 如何使用 Javascript 给元素增加/删除 class
+date: 2016-05-17
 tags:
 - JavaScript
 - jQuery
