@@ -1,0 +1,28 @@
+<div class="main">
+    <div class="blog-post">
+        <a href="/" title="回到首页"><i class="fa fa-home back-home" aria-hidden="true"></i></a>
+        <!-- Title -->
+        <h2 class="blog-post-title">
+            <a href="<%- config.root %><%- item.path %>">
+                <%- item.title || item.link%>
+            </a>
+        </h2>
+
+        <!-- Date and Author -->
+        <p class="blog-post-meta">
+            <%= item.date.format(config.date_format) %>
+            <% if(item.author) { %>
+                by <%- item.author %>
+            <% } %>
+        </p>
+
+        <!-- Content -->
+        <div class="post-content">
+            <%- item.content %>
+        </div>
+
+        <!-- Tags and Categories links -->
+        <%- partial('article-tags', {item: item}) %>
+        <%- partial('article-categories', {item: item}) %>
+    </div>
+</div>

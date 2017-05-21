@@ -1,0 +1,8 @@
+<div class="hamburger">
+    <i class="fa fa-bars"></i>
+</div>
+<nav class="blog-nav">
+    <% for (var i in theme.menu){ %>
+        <a class="blog-nav-item" href="<%- url_for(theme.menu[i]) %>"><%= i %></a>
+    <% } %>
+</nav>

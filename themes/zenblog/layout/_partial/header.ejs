@@ -1,0 +1,70 @@
+<div class="blog-header">
+    <div class="overlay">
+        <div class="blog-header-inner">
+            <h1 class="blog-title"><a href="/"><%= config.title %></a></h1>
+            <p class="blog-description"><% if (config.subtitle){ %><%= config.subtitle %><% } %></p>
+            <ul class="social-media">
+                <% if (theme.twitter) { %>
+                    <li>
+                        <a target="_blank" href="https://twitter.com/<%= theme.twitter %>">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </li>
+                <% } %>
+                <% if (theme.weibo) { %>
+                    <li>
+                        <a target="_blank" href="https://weibo.com/<%= theme.weibo %>">
+                            <i class="fa fa-weibo"></i>
+                        </a>
+                    </li>
+                <% } %>
+                <% if (theme.facebook) { %>
+                    <li>
+                        <a target="_blank" href="https://facebook.com/<%= theme.facebook %>">
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </li>
+                <% } %>
+                <% if (theme.instagram) { %>
+                    <li>
+                        <a target="_blank" href="https://instagram.com/<%= theme.instagram %>">
+                            <i class="fa fa-instagram"></i>
+                        </a>
+                    </li>
+                <% } %>
+                <% if (theme.github) { %>
+                    <li>
+                        <a target="_blank" href="https://github.com/<%= theme.github %>">
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </li>
+                <% } %>
+                <% if (theme.url) { %>
+                    <li>
+                        <a target="_blank" href="<%= theme.url %>">
+                            <i class="fa fa-laptop"></i>
+                        </a>
+                    </li>
+                <% } %>
+                <% if (theme.email) { %>
+                    <li>
+                        <a target="_blank" href="mailto:<%= theme.email %>">
+                            <i class="fa fa-envelope-o"></i>
+                        </a>
+                    </li>
+                <% } %>
+                <% if (theme.weixin) { %>
+                    <li>
+                        <a target="_blank" href="javascript:;" class="weixin">
+                            <i class="fa fa-weixin"></i>
+                            <div class="weixin-qrcode">
+                                <img src="<%= theme.weixin %>" alt="weixin-qrcode">
+                            </div>
+                        </a>
+                    </li>
+                <% } %>
+            </ul>
+        </div>
+        <a href="javascript:;" class="scroll-btn"><i class="fa fa-angle-down fa-2x"></i></a>
+    </div>
+</div>
