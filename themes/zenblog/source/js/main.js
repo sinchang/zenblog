@@ -3,7 +3,7 @@ window.onload = function() {
   new LinkIcon('post-content', 'class');
 
   // 点击向下滚动一屏
-  document.querySelector('.scroll-btn').addEventListener('click', scrollHandle, false);
+  document.querySelector('.scroll-btn') && document.querySelector('.scroll-btn').addEventListener('click', scrollHandle, false);
 
   function scrollHandle () {
     var wHeight = window.innerHeight;

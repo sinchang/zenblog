@@ -68,7 +68,7 @@ NodeList 是节点集合，在最新 Chrome 中测试，someNode.childNodes、no
 HTMLCollection 是元素集合，在最新 Chrome 中测试，node.children 和 node.getElementsByXXX 返回的就是 HTMLCollection。node.getElementsByName 返回的是 NodeList。
 
 参考资料：
-- [why `Element instanceof Node` return false](https://stackoverflow.com/questions/42685328/why-element-instanceof-node-return-false)
+- [why Element instanceof Node return false](https://stackoverflow.com/questions/42685328/why-element-instanceof-node-return-false)
 - [Element 和 Node 的区别你造吗？](http://www.jianshu.com/p/695b5c78a7ca)
 - [JavaScript 中 Element 与 Node 的区别，children 与 childNodes 的区别](http://www.cnblogs.com/jscode/archive/2012/09/04/2670819.html)
 - [NodeList 和 HTMLCollection 之间的关系？](https://www.zhihu.com/question/31576889/answer/52559370)
