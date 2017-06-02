@@ -25,7 +25,7 @@ body {
 }
 
 ul {
-  margin: 1em 0 1em 1em;
+  margin: 1em 0 1em 2em;
 }
 
 article,
@@ -300,19 +300,19 @@ table tr td :last-child {
 }
 
 
-/*.post-content h2:before,.post-content h3:before,.post-content h4:before,.post-content h5:before,.post-content h6:before {
+.post-content h2:before,.post-content h3:before,.post-content h4:before,.post-content h5:before,.post-content h6:before {
     content: "#";
-    color: #4078c0;
+    color: #42b983;
     position: absolute;
-    left: -0.7em;
-    top: -4px;
+    left: -0.8em;
+    top: -2px;
     font-size: 1.2em;
     font-weight: bold
 }
 
 .post-content h4:before,.post-content h5:before,.post-content h6:before {
     content: ""
-}*/
+}
 
 .post-content h2,
 .post-content h3 {
