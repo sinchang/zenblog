@@ -14,7 +14,7 @@ categories:
   <h2>title2</h2>
 </div>
 ```
-请问以上代码中 `div` 的 `childNodes` 的长度是多少？其实是这个很基础的问题，但是当时我问答的数量是错误的，回来研究了下其实这里面有很多学问。
+请问以上代码中 `div` 的 `childNodes` 的长度是多少？其实是个很基础的问题，但是当时我问答的数量是错误的，回来研究了下其实这里面有很多学问。
 
 ### Node 是什么？
 
@@ -49,7 +49,7 @@ Element.prototype instanceof Node // true
 
 NodeList 是节点集合，在最新 Chrome 中测试，someNode.childNodes、node.querySelectorAll 和 node.getElementsByName 返回的就是 NodeList。
  
-以上述的 `<div id="box"></div>` 为例，它的 `childNodes.length = 5`，其中元素直接的空白字符，当做为文本节点。但是如果换下 HTML 排版把它们放在同一行
+以上述的 `<div id="box"></div>` 为例，它的 `childNodes.length = 5`，其中元素之间的空白字符，当做为文本节点。但是如果换下 HTML 排版把它们放在同一行
 
 ```html
 <div id="box"><h1>title1</h1><h2>title2</h2></div>
