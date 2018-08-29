@@ -15,7 +15,7 @@ script:
 after_script:
   - cd ./public
   - rm CNAME
-  - echo "sinchang.me" >> CNAME
+  - echo "blog.sinchang.me" >> CNAME
   - git init
   - git config user.name "sinchang"
   - git config user.email "sinchangwen@gmail.com"
