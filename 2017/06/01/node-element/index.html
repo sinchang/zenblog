@@ -1,0 +1,161 @@
+<html>
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1,shrink-to-fit=no,user-scalable=no">
+    <title>sinchang</title>
+    <link rel="icon" href="/favicon.ico">
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="/css/blog.css">
+    <link href="http://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Google Analytics -->
+    
+
+</head>
+
+
+<body>
+    <div class="mask"></div>
+    <div class="container">
+        <div class="main">
+    <div class="blog-post">
+        <a href="/" title="回到首页"><i class="fa fa-home back-home" aria-hidden="true"></i></a>
+        <!-- Title -->
+        <h2 class="blog-post-title">
+            <a href="/2017/06/01/node-element/">
+                Node 与 Element 的关系
+            </a>
+        </h2>
+
+        <!-- Date and Author -->
+        <p class="blog-post-meta">
+            2017-06-01
+            
+        </p>
+
+        <!-- Content -->
+        <div class="post-content">
+            <p>前几天去面试，被问到一个关于 DOM 的问题，如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">"box"</span>&gt;</span><br><span class="line">  &lt;h1&gt;title1&lt;<span class="regexp">/h1&gt;</span></span><br><span class="line"><span class="regexp">  &lt;h2&gt;title2&lt;/</span>h2&gt;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>请问以上代码中 <code>div</code> 的 <code>childNodes</code> 的长度是多少？其实是个很基础的问题，但是当时我问答的数量是错误的，回来研究了下其实这里面有很多学问。</p>
+<h3 id="Node-是什么？"><a href="#Node-是什么？" class="headerlink" title="Node 是什么？"></a>Node 是什么？</h3><p>根据《JavaScript 高级程序设计》书里面的表述：</p>
+<blockquote>
+<p>DOM1 级定义了一个 Node 接口，该接口将由 DOM 中所有节点类型的实现。这个 Node 接口在 JavaScript 中作为 Node 类型的实现。JavaScript 中的所有节点类型都继承自 Node 类型。</p>
+</blockquote>
+<p>实际上 Node 表示的是 DOM 树的结构，常见的节点类型有：</p>
+<table>
+<thead>
+<tr>
+<th>常量</th>
+<th>值 (nodeType)</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Node.ELEMENT_NODE</td>
+<td>1</td>
+<td>一个元素节点，例如 <code>&lt;p&gt;</code> 和 <code>&lt;div&gt;</code></td>
+</tr>
+<tr>
+<td>Node.TEXT_NODE</td>
+<td>3</td>
+<td>Element 或者 Attr 中的文字</td>
+</tr>
+<tr>
+<td>Node.PROCESSING_INSTRUCTION_NODE</td>
+<td>7</td>
+<td>一个用于 xml 文档的 ProcessingInstruction，例如 &lt;?xml-stylesheet … ?&gt; 声明</td>
+</tr>
+<tr>
+<td>Node.COMMENT_NODE</td>
+<td>8</td>
+<td>一个注释节点</td>
+</tr>
+<tr>
+<td>Node.DOCUMENT_NODE</td>
+<td>9</td>
+<td>一个文档节点</td>
+</tr>
+<tr>
+<td>Node.DOCUMENT_TYPE_NODE</td>
+<td>10</td>
+<td>描述文档类型的 DocumentType 节点。例如 &lt;!DOCTYPE HTML&gt;</td>
+</tr>
+<tr>
+<td>Node.DOCUMENT_FRAGMENT_NODE</td>
+<td>11</td>
+<td>一个 DocumentFragment 节点</td>
+</tr>
+</tbody>
+</table>
+<p>每个节点都有 <code>nodeType</code>、<code>nodeName</code> 和 <code>nodeValue</code> 属性。以上述的 <code>&lt;div id=&quot;box&quot;&gt;&lt;/div&gt;</code> 为例，那么它的 <code>nodeName</code> 为 <code>DIV</code>,<code>nodeType</code> 为 <code>1</code>，<code>nodeValue</code> 为 <code>null</code>。</p>
+<blockquote>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Node/nodeValue" target="_blank" rel="noopener">Node.nodeValue</a>：对于文档节点来说，nodeValue 返回 null. 对于 text, comment, 和 CDATA 节点来说，nodeValue 返回该节点的文本内容。对于 attribute 节点来说，返回该属性的属性值。</p>
+</blockquote>
+<h3 id="Element-是什么？"><a href="#Element-是什么？" class="headerlink" title="Element 是什么？"></a>Element 是什么？</h3><p>从上述的介绍中我们可以知道 Element 是 Node 多种类型中的一种，它继承自 Node。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Element.prototype <span class="keyword">instanceof</span> Node <span class="comment">// true</span></span><br></pre></td></tr></table></figure></p>
+<p>另外 Element 扩展了 Node，Element 拥有 id、class、children 等属性。</p>
+<h3 id="NodeList-是什么？"><a href="#NodeList-是什么？" class="headerlink" title="NodeList 是什么？"></a>NodeList 是什么？</h3><p>NodeList 是节点集合，在最新 Chrome 中测试，someNode.childNodes、node.querySelectorAll 和 node.getElementsByName 返回的就是 NodeList。</p>
+<p>以上述的 <code>&lt;div id=&quot;box&quot;&gt;&lt;/div&gt;</code> 为例，它的 <code>childNodes.length = 5</code>，其中元素之间的空白字符，当做为文本节点。但是如果换下 HTML 排版把它们放在同一行</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"box"</span>&gt;</span><span class="tag">&lt;<span class="name">h1</span>&gt;</span>title1<span class="tag">&lt;/<span class="name">h1</span>&gt;</span><span class="tag">&lt;<span class="name">h2</span>&gt;</span>title2<span class="tag">&lt;/<span class="name">h2</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>那么它的 <code>childNodes.length = 2</code>。</p>
+<p>节点的其他属性还有：</p>
+<ul>
+<li>parentNode</li>
+<li>nextSibling</li>
+<li>previousSibling</li>
+<li>firstChild === someNode.childNodes [0]</li>
+<li>lastChild === someNode.childNodes [someNode.childNodes.length - 1]</li>
+</ul>
+<h3 id="HTMLCollection-是什么？"><a href="#HTMLCollection-是什么？" class="headerlink" title="HTMLCollection 是什么？"></a>HTMLCollection 是什么？</h3><p>HTMLCollection 是元素集合，在最新 Chrome 中测试，node.children 和 node.getElementsByXXX 返回的就是 HTMLCollection。node.getElementsByName 返回的是 NodeList。</p>
+<p>参考资料：</p>
+<ul>
+<li><a href="https://stackoverflow.com/questions/42685328/why-element-instanceof-node-return-false" target="_blank" rel="noopener">why Element instanceof Node return false</a></li>
+<li><a href="http://www.jianshu.com/p/695b5c78a7ca" target="_blank" rel="noopener">Element 和 Node 的区别你造吗？</a></li>
+<li><a href="http://www.cnblogs.com/jscode/archive/2012/09/04/2670819.html" target="_blank" rel="noopener">JavaScript 中 Element 与 Node 的区别，children 与 childNodes 的区别</a></li>
+<li><a href="https://www.zhihu.com/question/31576889/answer/52559370" target="_blank" rel="noopener">NodeList 和 HTMLCollection 之间的关系？</a></li>
+</ul>
+
+        </div>
+
+        <!-- Tags and Categories links -->
+        
+
+<div class="blog-tags-container">
+    <a href="/tags/DOM/"><i class="fa fa-tag"></i>DOM</a> <a href="/tags/Javascipt/"><i class="fa fa-tag"></i>Javascipt</a>
+</div>
+
+
+        
+
+<div class="blog-categories-container">
+    <a href="/categories/Javascipt/"><i class="fa fa-file"></i>Javascipt</a>
+</div>
+
+
+    </div>
+</div>
+
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="blog-footer">
+    <p>&copy; 2018 sinchang</p>
+    <p>Proudly published with <a href="http://hexo.io/">Hexo</a> | theme - <a href="https://github.com/sinchang/hexo-theme-zenblog">Zenblog</a></p>
+</footer>
+
+
+    <!-- After footer scripts -->
+    <script type="text/javascript" src="http://sinchang.qiniudn.com/link-icon.min.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+
+</html>
